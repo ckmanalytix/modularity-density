@@ -17,7 +17,7 @@ from fine_tuned_modularity \
  import fine_tuned_clustering_q
 
 
-class TestQds(object):
+class Test_all(object):
 
     def setup(self):
         self.G = nx.karate_club_graph()

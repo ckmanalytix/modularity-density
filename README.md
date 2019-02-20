@@ -10,8 +10,8 @@ carries out splitting and merging stages, alternatively, until
 neither splitting nor merging of the community structure
 improves the desired metric.
 
-Python implementations of fine-tuned optimizations of modularity and modularity density are in 'ModularityDensity/fine_tuned_modularity_density.py' and
-'ModularityDensity/fine_tuned_modularity.py';
+Python implementations of fine-tuned optimizations of modularity and modularity density are in 'ModularityDensity/fine_tuned_modularity.py' and
+'ModularityDensity/fine_tuned_modularity_density.py', respectively;
 'ModularityDensity/metrics.py' comprises implementation of the metrics
 modularity and modularity density.
 

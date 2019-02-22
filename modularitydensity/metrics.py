@@ -116,13 +116,23 @@ def modularity_r(adj, c, cluster_labels, r=0, dict_bool=None):
 
         Q = \sum_{c_i \in C}\left [ \frac{|E_{c_i}^{in}|}{|E|} -
             \left (\frac{2|E_{c_i}^{in}| +
-            |E_{c_i}{out}|}{2|E|}  \right )^2 \right ].
+            |E_{c_i}^{out}|}{2|E|}  \right )^2 \right ],
 
     where $C$ is the set of all communities. $c_i$ is a specific community in
     $C$, $|E_{c_i}^{in}|$ is the total weight of edges between nodes within
     community $c_i$, $|E_{c_i}{out}|$ is the total weight of edges from
     nodes in community $c_i$ to the nodes outside $c_i$, and $|E|$ is the
     total weight of edges in the network.
+
+    Modularity for rescaled topology (see [1]_) at scale $r$ is given as
+    .. math::
+
+        Q_r = \sum_{c_i \in C}\left [ \frac{2|E_{c_i}^{in}| +r|c_i|}{2|E| +
+              r|V|} - \left (\frac{2|E_{c_i}^{in}| + |E_{c_i}^{out}| +
+              r|c_i|}{2|E| + r|V|}  \right )^2 \right ],
+
+    where $|c_i|$ is the number of nodes in a specific community. $|V|$ is the
+    total number of nodes in the entire network structure.
 
     References
     ----------

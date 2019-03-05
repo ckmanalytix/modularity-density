@@ -10,7 +10,12 @@ import networkx as nx
 from networkx.utils import not_implemented_for
 import numpy as np
 from networkx.linalg.algebraicconnectivity import fiedler_vector
-from metrics import modularity_density
+
+try:
+    from modularitydensity.metrics import modularity_density
+except:
+    from metrics import modularity_density
+
 
 __all__ = ['fine_tuned_clustering_qds']
 

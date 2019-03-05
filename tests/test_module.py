@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
 """Unit tests for the fine_tuned_clustering_qds.py, fine_tuned_clustering_q.py,
    modularity_density.py, modularity_r.py modules
 """
@@ -5,9 +9,10 @@ import networkx as nx
 import numpy as np
 from nose.tools import assert_equal
 from nose.tools import raises
-
+import pytest
+import os
 import sys
-sys.path.append("..")
+sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../src/modularity_density/")
 
 from metrics import modularity_density
 from metrics import modularity_r
@@ -27,6 +32,7 @@ class Test_all(object):
 
         community_array = fine_tuned_clustering_qds(self.G, normalize=False,
                                                     seed=100)
+                                                    
 
         computed_metric = modularity_density(self.adj, community_array,
                                              np.unique(community_array))

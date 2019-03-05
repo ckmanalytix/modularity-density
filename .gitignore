@@ -12,6 +12,8 @@ __pycache__/*
 .cache/*
 .*.swp
 */.ipynb_checkpoints/*
+.DS_STORE
+.coveragerc
 
 # Project files
 .ropeproject

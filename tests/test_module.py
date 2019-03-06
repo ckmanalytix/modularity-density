@@ -12,14 +12,25 @@ from nose.tools import raises
 import pytest
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../src/modularity_density/")
 
-from metrics import modularity_density
-from metrics import modularity_r
-from fine_tuned_modularity_density \
- import fine_tuned_clustering_qds
-from fine_tuned_modularity \
- import fine_tuned_clustering_q
+try:
+    sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../src/modularity_density/")
+
+    from metrics import modularity_density
+    from metrics import modularity_r
+    from fine_tuned_modularity_density \
+    import fine_tuned_clustering_qds
+    from fine_tuned_modularity \
+    import fine_tuned_clustering_q
+except:
+    sys.path.append("../src/modularity_density/")
+
+    from metrics import modularity_density
+    from metrics import modularity_r
+    from fine_tuned_modularity_density \
+    import fine_tuned_clustering_qds
+    from fine_tuned_modularity \
+    import fine_tuned_clustering_q
 
 
 class Test_all(object):

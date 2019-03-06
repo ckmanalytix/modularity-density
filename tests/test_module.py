@@ -14,8 +14,7 @@ import os
 import sys
 
 try:
-    sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../src/modularity_density/")
-
+    sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../src/modularitydensity/")
     from metrics import modularity_density
     from metrics import modularity_r
     from fine_tuned_modularity_density \
@@ -23,7 +22,7 @@ try:
     from fine_tuned_modularity \
     import fine_tuned_clustering_q
 except:
-    sys.path.append("../src/modularity_density/")
+    sys.path.append("../src/modularitydensity/")
 
     from metrics import modularity_density
     from metrics import modularity_r

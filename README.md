@@ -1,8 +1,13 @@
-# Project Title
+Modularity Density
+==================
+[![Build Status](https://travis-ci.org/ckmanalytix/modularity-density.svg?branch=master)](https://travis-ci.org/ckmanalytix/modularity-density)
+
 Community detection by fine-tuned optimization of modularity
 and modularity density
 
-# Description
+Description
+-----------
+
 This repo comprises two community detection algorithms, which perform fine-tuned
 optimization of modularity and modularity density, respectively,
 of a community network structure. The fine-tuned algorithm iteratively
@@ -15,20 +20,24 @@ Python implementations of fine-tuned optimizations of modularity and modularity 
 'ModularityDensity/metrics.py' comprises implementation of the metrics
 modularity and modularity density.
 
-# Requirements
-Python >= 3.7.0,
+Requirements
+------------
+
+python >= 3.5.0,
 networkx >= 2.2,
 numpy >= 1.15.1,
 scipy >= 1.1.0,
-nose >= 1.3.7
 
-# Notes
+Notes
+-----
+
 The fine-tuned algorithm is found in [1]. This algorithm works for both
 weighted and unweighted, undirected graphs only. The mathematical expressions
 of modularity and modularity density are given by equations 35 and 39,
 respectively, in [1].
 
-# References
+References
+----------
 [1] CHEN M, KUZMIN K, SZYMANSKI BK. Community detection via maximization of
 modularity and its variants. IEEE Transactions on Computational Social Systems.
 1(1), 46–65, 2014

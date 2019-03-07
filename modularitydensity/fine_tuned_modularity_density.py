@@ -102,7 +102,7 @@ def split_communities_qds(adj, c, normalize, evd_method, tolerence, seed):
 
         # Don't consider further splitting singleton communities
         # or a community which has disconnected modules
-        if ((len(g) == 1) | (not(nx.is_connected(g)))):
+        if ((len_g == 1) | (not(nx.is_connected(g)))):
             if(not(nx.is_connected(g))):
                 print("Warning: Check your data as an earliar iteration \
                       resulted in a cluster with \

@@ -3,6 +3,8 @@
 
 
 """Unit tests for the fine_tuned_clustering_qds.py, fine_tuned_clustering_q.py,
+   constrained_fine_tuned_clustering_qds.py,
+   constrained_fine_tuned_clustering_q.py,
    modularity_density.py, modularity_r.py modules
 """
 import networkx as nx
@@ -21,6 +23,10 @@ try:
     import fine_tuned_clustering_qds
     from fine_tuned_modularity \
     import fine_tuned_clustering_q
+    from constrained_fine_tuned_modularity \
+    import constrained_fine_tuned_clustering_q
+    from constrained_fine_tuned_modularity_density \
+    import constrained_fine_tuned_clustering_qds
 except:
     sys.path.append("../src/modularitydensity/")
 
@@ -30,6 +36,10 @@ except:
     import fine_tuned_clustering_qds
     from fine_tuned_modularity \
     import fine_tuned_clustering_q
+    from constrained_fine_tuned_modularity \
+    import constrained_fine_tuned_clustering_q
+    from constrained_fine_tuned_modularity_density \
+    import constrained_fine_tuned_clustering_qds
 
 
 class Test_all(object):
@@ -42,7 +52,7 @@ class Test_all(object):
 
         community_array = fine_tuned_clustering_qds(self.G, normalize=False,
                                                     seed=100)
-                                                    
+
 
         computed_metric = modularity_density(self.adj, community_array,
                                              np.unique(community_array))

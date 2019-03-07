@@ -15,9 +15,21 @@ carries out splitting and merging stages, alternatively, until
 neither splitting nor merging of the community structure
 improves the desired metric.
 
-Python implementations of fine-tuned optimizations of modularity and modularity density are in 'ModularityDensity/fine_tuned_modularity.py' and
-'ModularityDensity/fine_tuned_modularity_density.py', respectively;
-'ModularityDensity/metrics.py' comprises implementation of the metrics
+Also included are extensions of the fine_tuned optimizations of both
+modularity and modularity density. These extended versions account for the
+constraint on the maximum community size, while optimizing the desired metric.
+
+Python implementations of the original fine-tuned optimizations of modularity
+and modularity density are in 'src/modularitydensity/fine_tuned_modularity.py' and
+'src/modularitydensity/fine_tuned_modularity_density.py', respectively.
+
+Where the extended algorithms are concerned, python implementations of the
+constrained versions (setting a threshold on maximum community size) of
+fine-tuned optimizations of modularity and modularity density are
+in 'src/modularitydensity/constrained_fine_tuned_modularity.py' and
+'src/modularitydensity/constrained_fine_tuned_modularity_density.py', respectively.
+
+'src/modularitydensity/metrics.py' comprises implementation of the metrics
 modularity and modularity density.
 
 Requirements

@@ -43,7 +43,7 @@ See requirements_test.txt and and requirements_dev.txt for additional modules re
 Installation
 -----
 ```sh
-pip install -i https://test.pypi.org/simple/ modularitydensity
+pip install modularitydensity
 ```
 
 Quick Start

@@ -1,14 +1,77 @@
-Modularity Density
+Modularity Density <img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/logo/CKM_green.svg" data-canonical-src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/logo/CKM_green.svg" width="40" height="40" /> 
 ==================
 [![Build Status](https://travis-ci.org/ckmanalytix/modularity-density.svg?branch=master)](https://travis-ci.org/ckmanalytix/modularity-density)
 
 Community detection by fine-tuned optimization of modularity
 and modularity density
 
+Dependencies
+------------
+
+<table>
+<tr>
+  <td>Python</td>
+  <td>
+    <a> >= 3.5.0 
+    </a>
+  </td>
+</tr>
+  <td>NetworkX</td>
+  <td>
+    <a> >= 2.2
+    </a>
+</td>
+</tr>
+<tr>
+  <td>NumPy</td>
+  <td>
+    <a> >= 1.15.1
+    </a>
+  </td>
+</tr>
+<tr>
+  <td>SciPy</td>
+  <td>
+    <a> >= 1.1.0
+    </a>
+  </td>
+</tr>
+</table>
+
+See requirements_test.txt and and requirements_dev.txt for additional modules required for testing and setting up a development environment.
+
+Installation
+-----
+
+Install module and dependencies:
+```sh
+pip install -i https://test.pypi.org/simple/ modularitydensity
+```
+
+Quick Start
+-----
+```python
+import networkx as nx
+import numpy as np
+from modularitydensity.metrics import modularity_density
+from modularitydensity.fine_tuned_modularity_density import fine_tuned_clustering_qds
+
+G = nx.karate_club_graph() #sample datasetprin
+adj = nx.to_scipy_sparse_matrix(G) #convert to sparse matrix
+
+community_array = fine_tuned_clustering_qds(G, normalize=False, seed=100)
+print(community_array)
+>> [1 1 1 1 3 3 3 1 6 2 3 5 1 1 6 6 3 1 6 1 6 1 6 6 4 4 6 4 4 6 6 4 6 6]
+
+computed_metric = modularity_density(adj, community_array, np.unique(community_array))
+print(computed_metric)
+>> 0.23821951467671487          
+```
+
 Description
 -----------
 
-This repo comprises two community detection algorithms, which perform fine-tuned
+This repo comprises two community detection algorithms which perform fine-tuned
 optimization of modularity and modularity density, respectively,
 of a community network structure. The fine-tuned algorithm iteratively
 carries out splitting and merging stages, alternatively, until
@@ -16,14 +79,14 @@ neither splitting nor merging of the community structure
 improves the desired metric.
 
 Also included are extensions of the fine_tuned optimizations of both
-modularity and modularity density. These extended versions account for the
+modules. These extended versions account for any
 constraint on the maximum community size, while optimizing the desired metric.
 
 Python implementations of the original fine-tuned optimizations of modularity
 and modularity density are in 'src/modularitydensity/fine_tuned_modularity.py' and
 'src/modularitydensity/fine_tuned_modularity_density.py', respectively.
 
-Where the extended algorithms are concerned, python implementations of the
+Python implementations of the
 constrained versions (setting a threshold on maximum community size) of
 fine-tuned optimizations of modularity and modularity density are
 in 'src/modularitydensity/constrained_fine_tuned_modularity.py' and
@@ -32,21 +95,18 @@ in 'src/modularitydensity/constrained_fine_tuned_modularity.py' and
 'src/modularitydensity/metrics.py' comprises implementation of the metrics
 modularity and modularity density.
 
-Requirements
-------------
-
-python >= 3.5.0,
-networkx >= 2.2,
-numpy >= 1.15.1,
-scipy >= 1.1.0,
-
 Notes
 -----
 
-The fine-tuned algorithm is found in [1]. This algorithm works for both
-weighted and unweighted, undirected graphs only. The mathematical expressions
-of modularity and modularity density are given by equations 35 and 39,
-respectively, in [1].
+The fine-tuned algorithm is described in [1]. This algorithm works for both
+weighted and unweighted, undirected graphs only. Modularity can be expressed mathematically as [1]: 
+
+<img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/equations/chen35.png" width="400"/> 
+
+and modularity density as [1]:
+
+<img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/equations/chen39.png" width="400"/> 
+
 
 References
 ----------

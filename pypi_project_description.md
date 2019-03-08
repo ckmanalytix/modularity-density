@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ckmanalytix/modularity-density.svg?branch=master)](https://travis-ci.org/ckmanalytix/modularity-density) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/modularitydensity.svg)
+[![Build Status](https://travis-ci.org/ckmanalytix/modularity-density.svg?branch=master)](https://travis-ci.org/ckmanalytix/modularity-density) ![Python badge](https://img.shields.io/badge/python-3.5|3.6|3.7-<blue>.svg)
 
 Community detection by fine-tuned optimization of modularity
 and modularity density
@@ -38,7 +38,7 @@ Dependencies
 Installation
 -----
 ```sh
-pip install -i https://test.pypi.org/simple/ modularitydensity
+pip install modularitydensity
 ```
 
 Quick Start
@@ -52,13 +52,13 @@ from modularitydensity.fine_tuned_modularity_density import fine_tuned_clusterin
 G = nx.karate_club_graph() #sample dataset
 adj = nx.to_scipy_sparse_matrix(G) #convert to sparse matrix
 
-community_array = fine_tuned_clustering_qds(G, normalize=False, seed=100)
+community_array = fine_tuned_clustering_qds(G)
 print(community_array)
->> [1 1 1 1 3 3 3 1 6 2 3 5 1 1 6 6 3 1 6 1 6 1 6 6 4 4 6 4 4 6 6 4 6 6]
+>> [2 2 2 2 4 4 4 2 3 3 4 2 2 2 3 3 4 2 3 2 3 2 3 3 1 1 3 3 3 3 3 1 3 3]
 
 computed_metric = modularity_density(adj, community_array, np.unique(community_array))
 print(computed_metric)
->> 0.23821951467671487          
+>> 0.2312650016945721    
 ```
 
 Description

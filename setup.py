@@ -28,7 +28,7 @@ reqs = ['numpy>=1.15.1',
 
 if __name__ == "__main__":
     setup(name='modularitydensity',
-        version='0.0.1',
+        version='0.0.5',
         description='Run modularity density-based clustering',
         long_description=readme,
         long_description_content_type='text/markdown',

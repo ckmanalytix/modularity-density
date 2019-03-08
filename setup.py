@@ -19,7 +19,7 @@ except VersionConflict:
     print("Error: version of setuptools is too old (<38.3)!")
     sys.exit(1)
 
-with open("README.md", "r") as readme_file:
+with open("pypi_project_description.md", "r") as readme_file:
     readme = readme_file.read()
 
 reqs = ['numpy>=1.15.1',
@@ -28,7 +28,7 @@ reqs = ['numpy>=1.15.1',
 
 if __name__ == "__main__":
     setup(name='modularitydensity',
-        version='0.0.3',
+        version='0.0.1',
         description='Run modularity density-based clustering',
         long_description=readme,
         long_description_content_type='text/markdown',

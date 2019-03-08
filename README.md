@@ -99,11 +99,11 @@ Notes
 -----
 
 The fine-tuned algorithm is described in [1]. This algorithm works for both
-weighted and unweighted, undirected graphs only. Modularity can be expressed mathematically as [1]: 
+weighted and unweighted, undirected graphs only. Modularity can be expressed mathematically as: 
 
 <img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/equations/chen35.png" width="400"/> 
 
-and modularity density as [1]:
+and modularity density as:
 
 <img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/equations/chen39.png" width="400"/> 
 

@@ -42,8 +42,6 @@ See requirements_test.txt and and requirements_dev.txt for additional modules re
 
 Installation
 -----
-
-Install module and dependencies:
 ```sh
 pip install -i https://test.pypi.org/simple/ modularitydensity
 ```

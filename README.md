@@ -1,6 +1,6 @@
 Modularity Density <img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/logo/CKM_green.svg" data-canonical-src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/logo/CKM_green.svg" width="40" height="40" /> 
 ==================
-[![Build Status](https://travis-ci.org/ckmanalytix/modularity-density.svg?branch=master)](https://travis-ci.org/ckmanalytix/modularity-density)
+[![Build Status](https://travis-ci.org/ckmanalytix/modularity-density.svg?branch=master)](https://travis-ci.org/ckmanalytix/modularity-density) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/modularitydensity.svg)
 
 Community detection by fine-tuned optimization of modularity
 and modularity density

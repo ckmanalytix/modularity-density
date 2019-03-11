@@ -15,7 +15,7 @@ Dependencies
 </tr>
   <td>NetworkX</td>
   <td>
-    <a> >= 2.2
+    <a> >= 2.2s
     </a>
 </td>
 </tr>

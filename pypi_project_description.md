@@ -1,5 +1,3 @@
-Modularity Density <img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/logo/CKM_green.svg" data-canonical-src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/logo/CKM_green.svg" width="40" height="40" /> 
-==================
 [![Build Status](https://travis-ci.org/ckmanalytix/modularity-density.svg?branch=master)](https://travis-ci.org/ckmanalytix/modularity-density) ![Python badge](https://img.shields.io/badge/python-3.5|3.6|3.7-<blue>.svg)
 
 Community detection by fine-tuned optimization of modularity
@@ -7,7 +5,6 @@ and modularity density
 
 Dependencies
 ------------
-
 <table>
 <tr>
   <td>Python</td>
@@ -18,7 +15,7 @@ Dependencies
 </tr>
   <td>NetworkX</td>
   <td>
-    <a> >= 2.2
+    <a> >= 2.2s
     </a>
 </td>
 </tr>
@@ -37,8 +34,6 @@ Dependencies
   </td>
 </tr>
 </table>
-
-See requirements_test.txt and and requirements_dev.txt for additional modules required for testing and setting up a development environment.
 
 Installation
 -----
@@ -69,7 +64,7 @@ print(computed_metric)
 Description
 -----------
 
-This repo comprises two community detection algorithms which perform fine-tuned
+This package comprises two community detection algorithms which perform fine-tuned
 optimization of modularity and modularity density, respectively,
 of a community network structure. The fine-tuned algorithm iteratively
 carries out splitting and merging stages, alternatively, until
@@ -80,31 +75,7 @@ Also included are extensions of the fine_tuned optimizations of both
 modules. These extended versions account for any
 constraint on the maximum community size, while optimizing the desired metric.
 
-Python implementations of the original fine-tuned optimizations of modularity
-and modularity density are in 'src/modularitydensity/fine_tuned_modularity.py' and
-'src/modularitydensity/fine_tuned_modularity_density.py', respectively.
-
-Python implementations of the
-constrained versions (setting a threshold on maximum community size) of
-fine-tuned optimizations of modularity and modularity density are
-in 'src/modularitydensity/constrained_fine_tuned_modularity.py' and
-'src/modularitydensity/constrained_fine_tuned_modularity_density.py', respectively.
-
-'src/modularitydensity/metrics.py' comprises implementation of the metrics
-modularity and modularity density.
-
-Notes
------
-
-The fine-tuned algorithm is described in [1]. This algorithm works for both
-weighted and unweighted, undirected graphs only. Modularity can be expressed mathematically as: 
-
-<img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/equations/chen35.png" width="400"/> 
-
-and modularity density as:
-
-<img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/equations/chen39.png" width="400"/> 
-
+Source code can be found at: https://github.com/ckmanalytix/modularity-density/
 
 References
 ----------

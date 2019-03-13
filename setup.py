@@ -19,24 +19,22 @@ except VersionConflict:
     print("Error: version of setuptools is too old (<38.3)!")
     sys.exit(1)
 
-with open("README.md", "r") as readme_file:
+with open("pypi_project_description.md", "r") as readme_file:
     readme = readme_file.read()
 
+# specifications to be reflected on PyPi page
 reqs = ['numpy>=1.15.1',
 'scipy>=1.1.0',
 'networkx>=2.2']
 
 if __name__ == "__main__":
     setup(name='modularitydensity',
-        version='0.0.3',
+        version='0.0.6',
         description='Run modularity density-based clustering',
         long_description=readme,
         long_description_content_type='text/markdown',
-        # author='CKM Analytix',
-        # author_email='smula@ckmanalytix.com',
-        # maintainer='CKM Analytix',
-        # maintainer_email='nvisatemongkolchai@ckmanalytix.com',
         license='MIT License (MIT License)',
         url='https://github.com/ckmanalytix/modularity-density',
         packages=find_packages(),
-        install_requires=reqs)
+        install_requires=reqs,
+        classifiers=['Programming Language :: Python'])

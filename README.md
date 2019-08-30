@@ -53,7 +53,6 @@ import networkx as nx
 import numpy as np
 from modularitydensity.metrics import modularity_density
 from modularitydensity.fine_tuned_modularity_density import fine_tuned_clustering_qds
-from modularitydensity.mula_modularity_density import fine_tuned_clustering_qds
 
 G = nx.karate_club_graph() #sample dataset
 adj = nx.to_scipy_sparse_matrix(G) #convert to sparse matrix

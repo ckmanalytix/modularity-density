@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) CKM Analytix Corp. All rights reserved.
-# Authors: Swathi M. Mula (smula@ckmanalytix.com)
+# Authors: Swathi M. Mula (smula@ckmanalytix.com), Gerardo J. Veltri (gveltri@ckmanalytix.com)
 
 """
 Metrics for determining quality of community structure
@@ -9,7 +9,7 @@ Metrics for determining quality of community structure
 import numpy as np
 from scipy.sparse import identity
 
-__all__ = ['modularity_r', 'modularity_density']
+__all__ = ['modularity_r', 'modularity_density', 'mula_modularity_density']
 
 
 def cluster_total_weight(adj_r, c, cluster_num, dict_bool):
@@ -513,3 +513,124 @@ def modularity_density(adj, c, cluster_labels,
     # Compute modularity density of a set of communities in 'cluster_labels'
     return compute_modularity_density(adj, c, conn_clusters, cluster_labels,
                                       total_weight, dict_bool)
+
+def dotdot(adj, vec1, vec2):
+    """Computes the dot product of a matrix with two vectors
+
+    Parameters
+    ----------
+    adj : Numpy Matrix or SciPy sparse matrix (csr or csc)
+        The N x N Adjacency matrix of the graph of interest.
+    vec1 : first Numpy array
+    vec2 : second Numpy array
+
+    Returns
+    -------
+    scalar (float, int, boolean, etc.)
+        Resulting scalar of dot product
+
+    """
+    return ((((adj).dot(vec1)).dot(vec2)))
+
+def norm_vector(vec):
+    """Normalizes vector for modularity density calculation
+
+    Parameters
+    ----------
+    vec : Numpy array to be normalized
+
+    Returns
+    -------
+    Numpy array
+
+    """
+    mod = (np.count_nonzero(vec))**0.5
+    vec = vec/mod
+    return vec
+
+def mula_modularity_density(adj, c, dict_vec=None):
+    r"""Determines modularity_density of a set of communities using a metric
+    that is free from bias and faster to compute.
+
+    Parameters
+    ----------
+    adj : SciPy sparse matrix (csr or csc)
+        The N x N Adjacency matrix of the graph of interest.
+    c : Integer array
+        Current array of community labels for the nodes in the graph as ordered
+        by the adjacency matrix.
+    dict_vec : dictionary, optional
+        Tracks the nodes in each community, with cluster labels as dictionary-
+        keys, and the corresponding boolean arrays (c == label) as values.
+
+    Returns
+    -------
+    float
+        Determines modularity_density of a set of communities
+        in 'cluster_labels'.
+
+    Examples
+    --------
+    >>> G = nx.karate_club_graph()
+    >>> adj = nx.to_scipy_sparse_matrix(G)
+    >>> c = fine_tuned_clustering_qds(G)
+    >>> c
+    array([4, 4, 4, 4, 2, 2, 2, 4, 3, 3, 2, 4, 4, 4, 3, 3, 2, 4, 3, 4, 3, 4,
+       3, 3, 1, 1, 3, 3, 3, 3, 3, 1, 3, 3])
+    >>> new_modularity_density(adj, c, np.unique(c))
+    0.23126500169457212
+    >>> new_modularity_density(adj, c, [1, 2])
+    0.06929093698324468
+    >>> new_modularity_density(adj, c, [1])
+    0.028788874942721095
+    >>> new_modularity_density(adj, c, [1])
+    0.028788874942721095
+
+    Notes
+    -----
+    Modularity density in [1] is given as
+    .. math::
+       Q = \sum_{c \in C}\Bigg\{\frac{\sum_{i,j \in c}T_{ij}}{n_c}  - \sum_{c^{\prime} \in C-c}\Bigg( \frac{\sum_{{i \in c,}{j \in c^{\prime}}}T_{ij}}{\sqrt{n_c n_{c^{\prime}}}}\Bigg)\Bigg\}
+
+       where:
+
+       - each cluster ${c \in C}$ is represented by an indicator vector ${\vec{v}_c = [v{_{c_i}}] \in {\R}^{|V|} : v{_{c_i}}= 1}$ if ${i \in c}$, else $0$
+
+       - \hat{n}_c = \frac{\vec{v}_c}{|\vec{v}_c|}
+
+    References
+    ----------
+    .. [1] MULA S, VELTRI G. A new measure of modularity density for 
+           community detection. arXiv:1908.08452 2019.
+
+    """
+
+    
+    cluster_labels = np.unique(c)
+    Nsum = 0
+    if (dict_vec is None):
+        collect_dict_vec = True
+        dict_vec = {}
+
+    for label in cluster_labels:
+        if collect_dict_vec:
+            vector = norm_vector((c == label)*1)
+            dict_vec[label] = vector
+        else:
+            dict_vect = dict_vec[label]*1 # verify vec is 0|1
+            
+        Nsum += dict_vec[label]
+
+    # penalty
+    penalty = dotdot(adj, Nsum, Nsum)
+
+    modularize = np.vectorize(lambda label: dotdot(adj, dict_vec[label],
+                              dict_vec[label]))
+
+    # Compute reduced modularity density of a set of communities
+    # in 'cluster_labels'
+
+    metric = 2*np.sum(modularize(cluster_labels)) - penalty
+
+    return(metric)
+

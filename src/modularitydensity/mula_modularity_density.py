@@ -181,7 +181,8 @@ def fine_tuned_clustering_mqds(G, normalize=True,
                               evd_method='lanczos',
                               tolerence=1e-08, seed=None):
     r"""Find communities in graph using
-       fine-tuned, modularity density maximization. This method supports
+       fine-tuned, modularity density maximization with a less biased
+       modularity metric [2]. This method supports
        weighted/unweighted, undirected graphs only
        and does not support directed graphs.
 
@@ -215,14 +216,15 @@ def fine_tuned_clustering_mqds(G, normalize=True,
     Examples
     --------
     >>> G = nx.karate_club_graph()
-    >>> c = fine_tuned_clustering_qds(G)
+    >>> c = fine_tuned_clustering_mqds(G)
     >>> c
-    array([4, 4, 4, 4, 2, 2, 2, 4, 3, 3, 2, 4, 4, 4, 3, 3, 2, 4, 3, 4, 3, 4,
-       3, 3, 1, 1, 3, 3, 3, 3, 3, 1, 3, 3])
+    array([2, 2, 2, 2, 3, 3, 3, 2, 1, 1, 3, 2, 2, 2, 1, 1, 3, 2, 1, 2, 1, 2,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
 
     Notes
     -----
-    The fine-tuned algorithm is found in [1]_. This algorithm works for both
+    The fine-tuned algorithm is found in [1]_. The metric is found in [2].
+    This algorithm works for both
     weighted and unweighted, undirected graphs only.
 
     References
@@ -230,6 +232,9 @@ def fine_tuned_clustering_mqds(G, normalize=True,
     .. [1] CHEN M, KUZMIN K, SZYMANSKI BK. Community detection via maximization
            of modularity and its variants. IEEE Transactions on Computational
            Social Systems. 1(1), 46–65, 2014
+
+    .. [2] MULA S, VELTRI G. A new measure of modularity density for 
+           community detection. arXiv:1908.08452 2019.
 
     """
 

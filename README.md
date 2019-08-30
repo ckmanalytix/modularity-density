@@ -69,20 +69,21 @@ print(computed_metric)
 Description
 -----------
 
-This repo comprises two community detection algorithms which perform fine-tuned
-optimization of modularity and modularity density, respectively,
-of a community network structure. The fine-tuned algorithm iteratively
+This repo comprises three community detection algorithms which perform fine-tuned
+optimization of modularity, modularity density [1] and Mula, et. al's modularity density [2],
+respectively, of a community network structure. The fine-tuned algorithm iteratively
 carries out splitting and merging stages, alternatively, until
 neither splitting nor merging of the community structure
 improves the desired metric.
 
-Also included are extensions of the fine_tuned optimizations of both
-modules. These extended versions account for any
+Also included are extensions of the fine_tuned optimizations of modularity 
+and modularity density modules. These extended versions account for any
 constraint on the maximum community size, while optimizing the desired metric.
 
 Python implementations of the original fine-tuned optimizations of modularity
 and modularity density are in 'src/modularitydensity/fine_tuned_modularity.py' and
-'src/modularitydensity/fine_tuned_modularity_density.py', respectively.
+'src/modularitydensity/fine_tuned_modularity_density.py', respectively. Optimization
+of the Mula, et. al's modularity density are in 'src/modularitydensity/mula_modularity_density.py'
 
 Python implementations of the
 constrained versions (setting a threshold on maximum community size) of
@@ -91,7 +92,7 @@ in 'src/modularitydensity/constrained_fine_tuned_modularity.py' and
 'src/modularitydensity/constrained_fine_tuned_modularity_density.py', respectively.
 
 'src/modularitydensity/metrics.py' comprises implementation of the metrics
-modularity and modularity density.
+modularity, modularity density, and Mula et. al's modularity density.
 
 Notes
 -----
@@ -101,9 +102,13 @@ weighted and unweighted, undirected graphs only. Modularity can be expressed mat
 
 <img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/equations/chen35.png" width="400"/> 
 
-and modularity density as:
+modularity density as:
 
-<img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/equations/chen39.png" width="400"/> 
+<img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/equations/chen39.png" width="400"/>
+
+and Mula, et. al's modularity density as:
+
+<img src="https://github.com/ckmanalytix/modularity-density/blob/master/doc/equations/mula-modularity.png" width="400"/>
 
 
 References
@@ -111,3 +116,7 @@ References
 [1] CHEN M, KUZMIN K, SZYMANSKI BK. Community detection via maximization of
 modularity and its variants. IEEE Transactions on Computational Social Systems.
 1(1), 46–65, 2014
+
+
+[2] MULA S, VELTRI G. A new measure of modularity density for community detection.
+Arxiv. arXiv:1908.08452 2019.

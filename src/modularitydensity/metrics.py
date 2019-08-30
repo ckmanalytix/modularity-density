@@ -9,7 +9,7 @@ Metrics for determining quality of community structure
 import numpy as np
 from scipy.sparse import identity
 
-__all__ = ['modularity_r', 'modularity_density']
+__all__ = ['modularity_r', 'modularity_density', 'mula_modularity_density']
 
 
 def cluster_total_weight(adj_r, c, cluster_num, dict_bool):
@@ -548,7 +548,7 @@ def norm_vector(vec):
     vec = vec/mod
     return vec
 
-def new_modularity_density(adj, c, dict_vec=None):
+def mula_modularity_density(adj, c, dict_vec=None):
     r"""Determines modularity_density of a set of communities using a metric
     that is free from bias and faster to compute.
 
@@ -598,8 +598,6 @@ def new_modularity_density(adj, c, dict_vec=None):
 
        - \hat{n}_c = \frac{\vec{v}_c}{|\vec{v}_c|}
 
-       - \vec{N} = \sum_{c^{\prime} \in C} \hat{n}_{c^{\prime}}
-
     References
     ----------
     .. [1] MULA S, VELTRI G. A new measure of modularity density for 
@@ -610,18 +608,18 @@ def new_modularity_density(adj, c, dict_vec=None):
     
     cluster_labels = np.unique(c)
     Nsum = 0
-
-    # Save unit vector of all clusters
     if (dict_vec is None):
+        collect_dict_vec = True
         dict_vec = {}
-        for label in cluster_labels:
+
+    for label in cluster_labels:
+        if collect_dict_vec:
             vector = norm_vector((c == label)*1)
             dict_vec[label] = vector
-            Nsum = Nsum + vector
-    else:
-        # verify dict_vec is 0|1
-        dict_vec = dict_vec*1
-        
+        else:
+            dict_vect = dict_vec[label]*1 # verify vec is 0|1
+            
+        Nsum += dict_vec[label]
 
     # penalty
     penalty = dotdot(adj, Nsum, Nsum)

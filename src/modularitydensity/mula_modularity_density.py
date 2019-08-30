@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-A
 # Copyright (c) CKM Analytix Corp. All rights reserved.
-# Authors: Swathi M. Mula (smula@ckmanalytix.com)
+# Authors: Gerardo Veltri (gveltri@ckmanalytix.com), Swathi M. Mula (smula@ckmanalytix.com)
 
 """
 Functions for detecting communities based on modularity density
@@ -13,15 +13,15 @@ import numpy as np
 from networkx.linalg.algebraicconnectivity import fiedler_vector
 
 try:
-    from modularitydensity.metrics import new_modularity_density
+    from modularitydensity.metrics import mula_modularity_density
 except:
-    from metrics import new_modularity_density
+    from metrics import mula_modularity_density
 
 
-__all__ = ['fine_tuned_clustering_nqds']
+__all__ = ['fine_tuned_clustering_mqds']
 
 
-def split_communities_nqds(adj, c, normalize, evd_method, tolerence, seed):
+def split_communities_mqds(adj, c, normalize, evd_method, tolerence, seed):
     """Splits the communities in graph if the splitting
        improves modularity density.
 
@@ -52,7 +52,7 @@ def split_communities_nqds(adj, c, normalize, evd_method, tolerence, seed):
 
     unique_clusters = np.unique(c)
     dict_bool = {}
-    curr_modularity = new_modularity_density(adj, c)
+    curr_modularity = mula_modularity_density(adj, c)
     curr_c  = c.copy()
     split_info = []
     split = False
@@ -103,7 +103,7 @@ def split_communities_nqds(adj, c, normalize, evd_method, tolerence, seed):
                 scratch_c = c.copy()
                 scratch_c[bool_r] = c_sub
 
-                split_value = new_modularity_density(adj, scratch_c)
+                split_value = mula_modularity_density(adj, scratch_c)
 
                 if split_value > curr_modularity:
                     split_info.append((split_value, scratch_c))
@@ -114,7 +114,7 @@ def split_communities_nqds(adj, c, normalize, evd_method, tolerence, seed):
 
     return split, curr_c
         
-def merge_communities_nqds(adj, c):
+def merge_communities_mqds(adj, c):
     """Merges the communities in graph if the merging improves modularity density.
 
     Parameters
@@ -137,7 +137,7 @@ def merge_communities_nqds(adj, c):
     unique_clusters = np.unique(c)
     dict_bool = {}
     merge_info = []
-    curr_modularity = new_modularity_density(adj, c)
+    curr_modularity = mula_modularity_density(adj, c)
 
     for label in unique_clusters:
         dict_bool[label] = (c == label)
@@ -151,7 +151,7 @@ def merge_communities_nqds(adj, c):
             merged_label = min(label1, label2)
             scratch_c[bool1 | bool2] = merged_label
 
-            merge_value = new_modularity_density(adj, scratch_c)
+            merge_value = mula_modularity_density(adj, scratch_c)
 
             if merge_value > curr_modularity:
                 merge_info.append((merge_value, (label1, label2)))
@@ -177,7 +177,7 @@ def merge_communities_nqds(adj, c):
 
 @not_implemented_for('directed')
 @not_implemented_for('multigraph')
-def fine_tuned_clustering_nqds(G, normalize=True,
+def fine_tuned_clustering_mqds(G, normalize=True,
                               evd_method='lanczos',
                               tolerence=1e-08, seed=None):
     r"""Find communities in graph using
@@ -251,10 +251,10 @@ def fine_tuned_clustering_nqds(G, normalize=True,
         split = True
         merged = True
         while split | merged:
-            split, c_new = split_communities_nqds(adj_gr, c_new, normalize,
+            split, c_new = split_communities_mqds(adj_gr, c_new, normalize,
                                                   evd_method, tolerence,
                                                   seed)
-            merged, c_new = merge_communities_nqds(adj_gr, c_new)
+            merged, c_new = merge_communities_mqds(adj_gr, c_new)
 
 
         # Update the community labels of the nodes corresponding
@@ -262,4 +262,3 @@ def fine_tuned_clustering_nqds(G, normalize=True,
         c_total[nodes_gr] = np.max(c_total) + 1 + c_new
 
     return c_total
-

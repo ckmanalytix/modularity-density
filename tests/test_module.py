@@ -19,6 +19,7 @@ try:
     sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../src/modularitydensity/")
     from metrics import modularity_density
     from metrics import modularity_r
+    from metrics import mula_modularity_density
     from fine_tuned_modularity_density \
     import fine_tuned_clustering_qds
     from fine_tuned_modularity \
@@ -27,11 +28,14 @@ try:
     import constrained_fine_tuned_clustering_q
     from constrained_fine_tuned_modularity_density \
     import constrained_fine_tuned_clustering_qds
+    from mula_modularity_density \
+    import fine_tuned_clustering_mqds
 except:
     sys.path.append("../src/modularitydensity/")
 
     from metrics import modularity_density
     from metrics import modularity_r
+    from metrics import mula_modularity_density
     from fine_tuned_modularity_density \
     import fine_tuned_clustering_qds
     from fine_tuned_modularity \
@@ -40,6 +44,8 @@ except:
     import constrained_fine_tuned_clustering_q
     from constrained_fine_tuned_modularity_density \
     import constrained_fine_tuned_clustering_qds
+    from mula_modularity_density \
+    import fine_tuned_clustering_mqds
 
 
 class Test_all(object):
@@ -247,6 +253,24 @@ class Test_all(object):
                                        np.unique(community_array))
 
         assert_equal(round(computed_metric, 4), 0.3909)
+
+    def test_fine_tuned_modularity_density_mula(self):
+
+        community_array = fine_tuned_clustering_mqds(self.G, normalize=False,
+                                                    seed=100)
+
+
+        computed_metric = mula_modularity_density(self.adj, community_array)
+
+        assert_equal(round(computed_metric, 4), 7.9706)
+
+    def test_fine_tuned_modularity_density_mula_normalized(self):
+
+        community_array = fine_tuned_clustering_mqds(self.G, seed=100)
+
+        computed_metric = mula_modularity_density(self.adj, community_array)
+
+        assert_equal(round(computed_metric, 4), 7.9706)
 
     @raises(nx.NetworkXNotImplemented)
     def test_fine_tuned_modularity_density_exception1(self):

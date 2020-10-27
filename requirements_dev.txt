@@ -9,7 +9,7 @@ cffi==1.12.1
 chardet==3.0.4
 cmarkgfm==0.4.2
 coverage==4.5.2
-cryptography==2.5
+cryptography==3.2
 decorator==4.3.2
 docutils==0.14
 future==0.17.1

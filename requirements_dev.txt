@@ -26,7 +26,7 @@ modularitydensity==0.0.1
 more-itertools==5.0.0
 networkx==2.2
 nose==1.3.7
-numpy==1.15.1
+numpy==1.22.0
 parso==0.3.4
 pexpect==4.6.0
 pickleshare==0.7.5
